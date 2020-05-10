@@ -1,0 +1,18 @@
+.contents {
+  width: 70vw;
+  height: 80vh;
+  background-color: antiquewhite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#canvas {
+  width: 100px;
+  height: 100px;
+  background-color: aquamarine;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
