@@ -3,12 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
   <link rel="stylesheet" href="style.css">
   <title>ドット絵パレット</title>
 </head>
 <body>
   <div class="contents">
-    <canvas id="canvas" width="480" height="480"></canvas>
+    <div class="wrapper">
+      <canvas id="canvas" width="480" height="480"></canvas>
+      <div class="palette">
+        <div class="color">
+          <div id="preview"></div>
+          <i class="fas fa-pencil-alt"></i>
+        </div>
+        <input type="range" id="R-range" class="range" value="0" min="0" max="255">
+        <input type="range" id="G-range" class="range" value="0" min="0" max="255">
+        <input type="range" id="B-range" class="range" value="0" min="0" max="255">
+      </div>
+    </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="script.js"></script>
