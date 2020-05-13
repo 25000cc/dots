@@ -3,7 +3,7 @@
 }
 
 .contents {
-  width: 70vw;
+  width: 80vw;
   height: 80vh;
   background-color: antiquewhite;
   position: absolute;
@@ -14,12 +14,20 @@
 
 .wrapper {
   position: absolute;
-  top: 50px;
-  left: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
 }
 
 #canvas {
+  height: 480px;
+  border: black solid 1px;
+}
+
+#canvas2 {
+  position: absolute;
+  pointer-events: none;
   border: black solid 1px;
 }
 
@@ -43,15 +51,24 @@
   border: gray solid 5px;
 }
 
-.fa-pencil-alt {
+.fa-pencil-alt, .fa-fill-drip {
   font-size: 60px;
   margin: 10px 10px;
+  cursor: pointer;
+}
+
+.fa-pencil-alt:active, .fa-fill-drip:active {
+  margin: 18px 10px;
+}
+
+.fa-fill-drip {
+  display: none;
 }
 
 .range {
   -webkit-appearance: none;
   appearance: none;
-  background: #7A7A7A;
+  background: gray;
   height: 5px;
   width: 180px;
   margin: 0;
