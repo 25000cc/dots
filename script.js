@@ -44,33 +44,15 @@ $(function() {
     isDrip = false;
   }
 
-  const chunk = (arr, n) => {
-    const len = Math.round(arr.length / n);
-    const ret = [];
-    for (let i = 0; i < len; i++) {
-        ret.push(arr.slice(i * n, i * n + n));
-    }
-    return ret;
-};
-
   // 色塗り処理
   canvas.addEventListener("click", function(event) {
-    var clickX = event.pageX ;
-    var clickY = event.pageY ;
-
-    // 要素の位置を取得
-    var clientRect = this.getBoundingClientRect() ;
-    var positionX = clientRect.left + window.pageXOffset ;
-    var positionY = clientRect.top + window.pageYOffset ;
-
-    // 要素内におけるクリック位置を計算
-    var x = clickX - positionX ;
-    var y = clickY - positionY ;
-    if (!isDrip) {
+    const rect = event.target.getBoundingClientRect()
+    let x = Math.round(event.clientX - rect.left);
+    let y = Math.round(event.clientY - rect.top);
+    if (!isDrip) { // 1マス塗り
       ctx.fillStyle = preview.style.backgroundColor;
       ctx.fillRect(x - x % dotSize, y - y % dotSize, dotSize, dotSize);
-    } else {
-      // todo drip
+    } else { // 塗りつぶし（バケツ）
       let matrix = [];
       const data = ctx.getImageData(0, 0, width, width).data;
       for(let i = 0; i < Math.ceil(data.length / 4); i++) {
