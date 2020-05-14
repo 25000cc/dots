@@ -78,10 +78,29 @@
 .range::-webkit-slider-thumb {
   -webkit-appearance: none;
   background: white;
-  border: solid 0.4vh black;
-  height: 2vh;
-  width: 2vh;
+  border: solid 4px black;
+  height: 18px;
+  width: 18px;
   border-radius: 50%;
   cursor: pointer;
 }
 
+.blocks {
+  display: flex;
+  margin-top: 20px;
+}
+
+.block {
+  width: 20px;
+  height: 20px;
+  border: solid 1px black;
+}
+
+#block1 { background-color: red; }
+#block2 { background-color: rgb(255, 115, 0); }
+#block3 { background-color: rgb(255, 255, 0); }
+#block4 { background-color: rgb(0, 255, 0); }
+#block5 { background-color: rgb(0, 255, 255); }
+#block6 { background-color: rgb(0, 0, 255); }
+#block7 { background-color: rgb(255, 0, 255); }
+#block8 { background-color: rgba(255, 255, 255); }

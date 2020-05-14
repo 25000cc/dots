@@ -100,4 +100,16 @@ $(function() {
       ctx.fillRect(0, 0, width, width)
     }
   }
+
+  for (let i = 1; i < 9; i++) {
+    const block = $(`#block${i}`)[0];
+    block.onclick = () => {
+      const backgroundColor = window.getComputedStyle(block).backgroundColor;
+      preview.style.backgroundColor = backgroundColor;
+      const arr = backgroundColor.match(/[0-9]+\.?[0-9]*/g);
+      for (let i = 0; i < 3; i++) {
+        RGB[i].value = arr[i];
+      }
+    }
+  }
 });
