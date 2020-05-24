@@ -112,9 +112,15 @@
   display: flex;
 }
 
-.fa-reply, .fa-share, .fa-eye-dropper {
+.fa-reply, .fa-share {
   font-size: 50px;
   margin-right: 10px;
+  cursor: pointer;
+}
+
+.fa-eye-dropper {
+  font-size: 45px;
+  margin-right: 20px;
   cursor: pointer;
 }
 

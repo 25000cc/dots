@@ -10,6 +10,8 @@ $(function() {
   const width = canvas.width;
   const pxSize = 16;
   const dotSize = width / pxSize;
+  let undoStack = [];
+  let redoStack = [];
 
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, width, width);
@@ -40,13 +42,11 @@ $(function() {
     pencil.style.display = 'none';
     isDrip = true;
   }
-
   drip.onclick = () => {
     pencil.style.display = 'block';
     drip.style.display = 'none';
     isDrip = false;
   }
-
   dropper.onclick = () => {
     if (!isDropper) {
       dropper.style.marginTop = '5px';
@@ -56,14 +56,12 @@ $(function() {
       cancelDropper()
     }
   }
-
   function cancelDropper() {
     dropper.style.marginTop = '0px';
     dropper.style.color = 'black';
     isDropper = false;
   }
 
-  // 色塗り処理
   canvas.addEventListener("click", function(event) {
     const rect = event.target.getBoundingClientRect()
     let x = Math.round(event.clientX - rect.left);
@@ -71,10 +69,11 @@ $(function() {
     if (isDropper) { // 塗りつぶし（バケツ）
       dropper_(x, y);
     } else if (isDrip) { // スポイト
+      recordUndoImage();
       drip_(x, y);
     } else { // 1マス塗り
-      ctx.fillStyle = preview.style.backgroundColor;
-      ctx.fillRect(x - x % dotSize, y - y % dotSize, dotSize, dotSize);
+      recordUndoImage();
+      singlePaint(x, y);
     }
   });
 
@@ -105,13 +104,6 @@ $(function() {
     ctx.putImageData(imageData, 0, 0)
   }
 
-  function setColor(r, g, b) {
-    preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-    R.value = r;
-    G.value = g;
-    B.value = b;
-  }
-
   function dropper_(x, y) {
     const imageData = ctx.getImageData(x, y, 1, 1);
     const r = imageData.data[0];
@@ -119,6 +111,18 @@ $(function() {
     const b = imageData.data[2];
     setColor(r, g, b)
     cancelDropper();
+  }
+  
+  function singlePaint(x, y) {
+    ctx.fillStyle = preview.style.backgroundColor;
+    ctx.fillRect(x - x % dotSize, y - y % dotSize, dotSize, dotSize);
+  }
+
+  function setColor(r, g, b) {
+    preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    R.value = r;
+    G.value = g;
+    B.value = b;
   }
 
   // RGB
@@ -141,6 +145,7 @@ $(function() {
     }
   }
 
+  // カラーパレット
   for (let i = 1; i < 9; i++) {
     const block = $(`#block${i}`)[0];
     block.onclick = () => {
@@ -148,5 +153,28 @@ $(function() {
       const arr = backgroundColor.match(/[0-9]+\.?[0-9]*/g);
       setColor(arr[0], arr[1], arr[2])
     }
+  }
+
+  // undo redo
+  $('.fa-reply')[0].onclick = () => {
+    if (undoStack.length!=0) {
+      const imageData = undoStack.pop();
+      recordRedoImage();
+      ctx.putImageData(imageData, 0, 0);
+    }
+  }
+  $('.fa-share')[0].onclick = () => {
+    if (redoStack.length!=0) {
+      const imageData = redoStack.pop();
+      recordUndoImage();
+      ctx.putImageData(imageData, 0, 0);
+    }
+  }
+
+  function recordUndoImage() {
+    undoStack.push(ctx.getImageData(0, 0, width, width));
+  }
+  function recordRedoImage() {
+    redoStack.push(ctx.getImageData(0, 0, width, width));
   }
 });
