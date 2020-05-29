@@ -8,27 +8,39 @@ $(function() {
   const preview = $('#preview')[0];
   const ctx = canvas.getContext('2d');
   const width = canvas.width;
-  const pxSize = 16;
-  const dotSize = width / pxSize;
+  let pxSize;
+  let dotSize;
   let undoStack = [];
   let redoStack = [];
+  const values = [16, 24, 32, 48, 64, 96]
+  
+  for (let v of values) {
+    $(`input[value="${v}×${v}"]`)[0].onclick = () => {
+      pxSize = v;
+      dotSize = width / pxSize;
+      $('.new')[0].style.display = 'none';
+      $('.cover')[0].style.display = 'none';
+      grid();
+    }
+  }
 
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, width, width);
   ctx.fillStyle = 'black';
 
-  // グリッド描写
-  let ctx2 = canvas2.getContext('2d');
-  for (let i = 1; i < pxSize; i++) {
-    ctx2.beginPath();
-    let xy = i * dotSize;
-    ctx2.moveTo(xy, 0);
-    ctx2.lineTo(xy, width);
-    ctx2.stroke();
-    ctx2.beginPath();
-    ctx2.moveTo(0, xy);
-    ctx2.lineTo(width, xy);
-    ctx2.stroke();
+  function grid() {
+    let ctx2 = canvas2.getContext('2d');
+    for (let i = 1; i < pxSize; i++) {
+      ctx2.beginPath();
+      let xy = i * dotSize;
+      ctx2.moveTo(xy, 0);
+      ctx2.lineTo(xy, width);
+      ctx2.stroke();
+      ctx2.beginPath();
+      ctx2.moveTo(0, xy);
+      ctx2.lineTo(width, xy);
+      ctx2.stroke();
+    }
   }
 
   const pencil = $('.fa-pencil-alt')[0];
