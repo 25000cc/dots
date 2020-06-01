@@ -64,7 +64,7 @@ button, input {
 }
 
 #canvas {
-  height: 480px;
+  height: 512px;
   border: black solid 1px;
 }
 
@@ -76,7 +76,7 @@ button, input {
 
 .palette {
   width: 200px;
-  height: 500px;
+  height: 512px;
   right: 0;
   margin-left: 20px;
 }
@@ -171,13 +171,18 @@ button, input {
   margin-top: 5px;
 }
 
-#clear {
+#clear, #save {
+  margin-top: 5px;
   width: 180px;
   text-align: center;
   background-color: rgb(83, 83, 83);
   color: white;
 }
 
-#clear:hover {
+#clear:hover, #save:hover {
   background-color: rgb(63, 63, 63);
+}
+
+.save-image {
+  display: none;
 }

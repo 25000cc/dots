@@ -8,16 +8,16 @@ $(function() {
   const preview = $('#preview')[0];
   const ctx = canvas.getContext('2d');
   const width = canvas.width;
-  let pxSize;
+  let canvasSize;
   let dotSize;
   let undoStack = [];
   let redoStack = [];
-  const values = [16, 24, 32, 48, 64, 96]
+  const values = [16, 24, 32, 48, 64, 96, 128]
   
   for (let v of values) {
     $(`input[value="${v}×${v}"]`)[0].onclick = () => {
-      pxSize = v;
-      dotSize = width / pxSize;
+      canvasSize = v;
+      dotSize = width / canvasSize;
       $('.new')[0].style.display = 'none';
       $('.cover')[0].style.display = 'none';
       grid();
@@ -30,7 +30,7 @@ $(function() {
 
   function grid() {
     let ctx2 = canvas2.getContext('2d');
-    for (let i = 1; i < pxSize; i++) {
+    for (let i = 1; i < canvasSize; i++) {
       ctx2.beginPath();
       let xy = i * dotSize;
       ctx2.moveTo(xy, 0);
@@ -189,4 +189,13 @@ $(function() {
   function recordRedoImage() {
     redoStack.push(ctx.getImageData(0, 0, width, width));
   }
+
+  // 保存
+  $('#save')[0].onclick = () => {
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL();
+    a.download = 'download.jpg';
+    a.click();
+  }
+
 });
