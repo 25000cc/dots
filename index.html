@@ -1,60 +1,50 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-  <link rel="stylesheet" href="style.css">
-  <title>ドット絵パレット</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <title>ドット絵パレット</title>
 </head>
+
 <body>
-  <div class="contents">
-    <div class="cover"></div>
-    <div class="new">
-      <p>キャンバスサイズを選んでください</p>
-      <input type="button" value="16×16" class="canvas-size">
-      <input type="button" value="24×24" class="canvas-size">
-      <input type="button" value="32×32" class="canvas-size">
-      <input type="button" value="48×48" class="canvas-size">
-      <input type="button" value="64×64" class="canvas-size">
-      <input type="button" value="96×96" class="canvas-size">
-      <input type="button" value="128×128" class="canvas-size">
+    <div class="contents">
+        <div class="cover"></div>
+        <div class="new">
+            <p>キャンバスサイズを選んでください</p>
+            <input type="button" value="16×16" class="canvas-size">
+            <input type="button" value="24×24" class="canvas-size">
+            <input type="button" value="32×32" class="canvas-size">
+            <input type="button" value="48×48" class="canvas-size">
+            <input type="button" value="64×64" class="canvas-size">
+            <input type="button" value="96×96" class="canvas-size">
+            <input type="button" value="128×128" class="canvas-size">
+        </div>
+        <div class="wrapper">
+            <canvas id="canvas" width="512" height="512"></canvas>
+            <canvas id="canvas2" width="512" height="512"></canvas>
+            <div class="palette">
+                <div class="color">
+                    <input type="color" id="color-picker">
+                    <i class="fas fa-pencil-alt"></i>
+                    <i class="fas fa-fill-drip"></i>
+                </div>
+                <div class="undo-redo">
+                    <i class="fas fa-reply"></i>
+                    <i class="fas fa-share"></i>
+                </div>
+                <button id="init">新規</button>
+                <button id="clear">キャンバスをクリア</button>
+                <button id="save">画像を保存</button>
+            </div>
+        </div>
     </div>
-    <div class="wrapper">
-      <canvas id="canvas" width="512" height="512"></canvas>
-      <canvas id="canvas2" width="512" height="512"></canvas>
-      <div class="palette">
-        <div class="color">
-          <div id="preview"></div>
-          <i class="fas fa-pencil-alt"></i>
-          <i class="fas fa-fill-drip"></i>
-        </div>
-        <input type="range" id="R-range" class="range" value="0" min="0" max="255">
-        <input type="range" id="G-range" class="range" value="0" min="0" max="255">
-        <input type="range" id="B-range" class="range" value="0" min="0" max="255">
-        <div class="blocks">
-          <div id="block1" class="block"></div>
-          <div id="block2" class="block"></div>
-          <div id="block3" class="block"></div>
-          <div id="block4" class="block"></div>
-          <div id="block5" class="block"></div>
-          <div id="block6" class="block"></div>
-          <div id="block7" class="block"></div>
-          <div id="block8" class="block"></div>
-        </div>
-        <div class="undo-redo">
-          <i class="fas fa-reply"></i>
-          <i class="fas fa-share"></i>
-          <i class="fas fa-eye-dropper"></i>
-        </div>
-        <button id="clear">キャンバスをクリア</button>
-        <button id="save">画像を保存</button>
-      </div>
-    </div>
-  </div>
-  <script src="ref/flood_fill_canvas.js"></script>
-  <script src="ref/util.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-  <script src="script.js"></script>
+    <script src="ref/flood_fill_canvas.js"></script>
+    <script src="ref/util.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
